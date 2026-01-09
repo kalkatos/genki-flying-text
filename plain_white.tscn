@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgcjg1u4h6ktw"]
+
+[ext_resource type="Script" uid="uid://cvk7ginug03c3" path="res://addons/GenkiDamage/damage_number.gd" id="1_bugen"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jri2w"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Curve" id="Curve_aa34x"]
+_data = [Vector2(0, 0), 0.0, 0.22, 0, 0, Vector2(0.0446097, 1), 3.655, 0.26, 0, 0, Vector2(0.8, 1.2), 0.215, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_tl6i0"]
+offsets = PackedFloat32Array(0, 0.763934, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="DamageNumber" type="Node2D" node_paths=PackedStringArray("label", "subviewport", "particles")]
+script = ExtResource("1_bugen")
+label = NodePath("SubViewport/Label")
+subviewport = NodePath("SubViewport")
+particles = NodePath("CPUParticles2D")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(50, 50)
+
+[node name="Label" type="Label" parent="SubViewport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -25.0
+offset_right = 26.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 60
+theme_override_font_sizes/font_size = 20
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 1
+texture = SubResource("ViewportTexture_jri2w")
+lifetime = 1.2
+one_shot = true
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+scale_amount_curve = SubResource("Curve_aa34x")
+color_ramp = SubResource("Gradient_tl6i0")
