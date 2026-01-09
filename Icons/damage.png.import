@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bo7uc4yxwy1t4"
-path="res://.godot/imported/damage.png-e5a0c64d8c419d054e246f540c4ff732.ctex"
+path="res://.godot/imported/damage.png-c665576607cc66677a601fb5883861b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/GenkiDamage/Icons/damage.png"
-dest_files=["res://.godot/imported/damage.png-e5a0c64d8c419d054e246f540c4ff732.ctex"]
+source_file="res://addons/genki-flying-text/Icons/damage.png"
+dest_files=["res://.godot/imported/damage.png-c665576607cc66677a601fb5883861b9.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cgcjg1u4h6ktw"]
 
-[ext_resource type="Script" uid="uid://cvk7ginug03c3" path="res://addons/GenkiDamage/damage_number.gd" id="1_bugen"]
+[ext_resource type="Script" uid="uid://cvk7ginug03c3" path="res://addons/genki-flying-text/damage_number.gd" id="1_bugen"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_jri2w"]
 viewport_path = NodePath("SubViewport")
