@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgcjg1u4h6ktw"]
+[gd_scene format=3 uid="uid://cgcjg1u4h6ktw"]
 
 [ext_resource type="Script" uid="uid://cvk7ginug03c3" path="res://addons/genki-flying-text/damage_number.gd" id="1_bugen"]
 
@@ -13,18 +13,18 @@ point_count = 4
 offsets = PackedFloat32Array(0, 0.763934, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="DamageNumber" type="Node2D" node_paths=PackedStringArray("label", "subviewport", "particles")]
+[node name="DamageNumber" type="Node2D" unique_id=1139391757 node_paths=PackedStringArray("label", "subviewport", "particles")]
 script = ExtResource("1_bugen")
 label = NodePath("SubViewport/Label")
 subviewport = NodePath("SubViewport")
 particles = NodePath("CPUParticles2D")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=618055762]
 disable_3d = true
 transparent_bg = true
 size = Vector2i(50, 50)
 
-[node name="Label" type="Label" parent="SubViewport"]
+[node name="Label" type="Label" parent="SubViewport" unique_id=544501189]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -43,7 +43,7 @@ text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1252064594]
 emitting = false
 amount = 1
 texture = SubResource("ViewportTexture_jri2w")
