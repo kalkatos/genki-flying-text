@@ -1,5 +1,6 @@
 @icon("uid://bo7uc4yxwy1t4")
 class_name DamageNumber
+## Component specialized in displaying animated floating numbers (e.g., damage, healing) in 2D or 3D space.
 extends Node2D
 
 signal finished
@@ -15,14 +16,21 @@ var is_playing: bool
 static var first_instances: Dictionary[PackedScene, DamageNumber] = {}
 
 
+## Initializes the damage number, connecting particle signals and setting up the visual components.
 func _ready () -> void:
 	is_playing = false
+	# Link subviewport texture to particles for label rendering
 	particles.texture = subviewport.get_texture()
 	particles.finished.connect(_handle_particles_finished)
 
 
+## Plays the damage number animation with the given string value and position.
+## [param value]: The text to display (e.g., "15").
+## [param position]: World-space 2D position to start the animation.
+## [param color]: Optional color for the text and particles.
 func play (value: String, position: Vector2, color: Color = Color.WHITE) -> void:
 	Debug.logm("Playing damage number: %s at %s" % [value, position])
+	# Handle pooling: spawn a duplicate if already playing
 	if is_playing:
 		var other = Pooler.get_new(self) as DamageNumber
 		var my_parent = get_parent()
@@ -41,6 +49,7 @@ func play (value: String, position: Vector2, color: Color = Color.WHITE) -> void
 	particles.restart()
 
 
+## Internal handler callback triggered when particle animation completes.
 func _handle_particles_finished ():
 	particles.emitting = false
 	is_playing = false
@@ -48,11 +57,14 @@ func _handle_particles_finished ():
 	visible = false
 
 
+## Static helper to play a damage number from a prefab, managing persistence and initialization.
 static func play_static (prefab: PackedScene, value: String, position: Vector2, color: Color = Color.WHITE, parent: Node = null) -> void:
+	# Reuse base instance if it already exists
 	if first_instances.has(prefab):
 		first_instances[prefab].play(value, position, color)
 		Debug.logm("Reusing existing damage number instance")
 		return
+	# Instantiate first occurrence
 	var instance = prefab.instantiate() as DamageNumber
 	if parent:
 		parent.add_child(instance)
@@ -65,14 +77,18 @@ static func play_static (prefab: PackedScene, value: String, position: Vector2, 
 	instance.play(value, position, color)
 
 
+## Static helper to play a damage number with a default white color and specific parent.
 static func play_static_parent (prefab: PackedScene, value: String, position: Vector2, parent: Node = null) -> void:
 	play_static(prefab, value, position, Color.WHITE, parent)
 
 
+## Static helper to play a 2D damage number at a projected 3D world position.
 static func play_static_3d (prefab: PackedScene, value: String, position: Vector3, color: Color = Color.WHITE, parent: Node = null) -> void:
+	# Unproject 3D position to screen space
 	var pos2d = Global.get_viewport().get_camera_3d().unproject_position(position)
 	play_static(prefab, value, pos2d, color, parent)
 
 
+## Static helper to play a 2D damage number at a 3D position with specific parent and default color.
 static func play_static_3d_parent (prefab: PackedScene, value: String, position: Vector3, parent: Node = null) -> void:
 	play_static_3d(prefab, value, position, Color.WHITE, parent)
