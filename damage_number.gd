@@ -29,7 +29,7 @@ func _ready () -> void:
 ## [param position]: World-space 2D position to start the animation.
 ## [param color]: Optional color for the text and particles.
 func play (value: String, position: Vector2, color: Color = Color.WHITE) -> void:
-	Debug.logm("Playing damage number: %s at %s" % [value, position])
+	print("Playing damage number: %s at %s" % [value, position])
 	# Handle pooling: spawn a duplicate if already playing
 	if is_playing:
 		var other = Pooler.get_new(self) as DamageNumber
@@ -38,9 +38,9 @@ func play (value: String, position: Vector2, color: Color = Color.WHITE) -> void
 			my_parent.add_child(other)
 			other.owner = my_parent
 		other.play(value, position, color)
-		Debug.logm("Spawned pooled damage number instance")
+		print("Spawned pooled damage number instance")
 		return
-	Debug.logm("Using existing damage number instance")
+	print("Using existing damage number instance")
 	visible = true
 	is_playing = true
 	label.text = prefix + value + suffix
@@ -62,7 +62,7 @@ static func play_static (prefab: PackedScene, value: String, position: Vector2, 
 	# Reuse base instance if it already exists
 	if first_instances.has(prefab):
 		first_instances[prefab].play(value, position, color)
-		Debug.logm("Reusing existing damage number instance")
+		print("Reusing existing damage number instance")
 		return
 	# Instantiate first occurrence
 	var instance = prefab.instantiate() as DamageNumber
@@ -72,7 +72,7 @@ static func play_static (prefab: PackedScene, value: String, position: Vector2, 
 	else:
 		Global.get_tree().get_root().add_child(instance)
 		instance.owner = Global.get_tree().get_root()
-	Debug.logm("Creating first damage number instance")
+	print("Creating first damage number instance")
 	first_instances[prefab] = instance
 	instance.play(value, position, color)
 

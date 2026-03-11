@@ -15,7 +15,7 @@ func _input (event: InputEvent) -> void:
 			_instance = damage_number.instantiate() as DamageNumber
 			add_child(_instance)
 			_instance.owner = self
-			Debug.logm("Instantiated " + str(_instance))
+			print("Instantiated " + str(_instance))
 		_test_value += 1
 		# Play animation at click position
 		_instance.play(str(_test_value), event.position)
