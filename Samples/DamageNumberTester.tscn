@@ -1,8 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://xm3e2txawpy7"]
+[gd_scene format=3 uid="uid://xm3e2txawpy7"]
 
 [ext_resource type="Script" uid="uid://cnudeduudlwi2" path="res://addons/genki-flying-text/Samples/damage_number_tester.gd" id="1_wmqxx"]
 [ext_resource type="PackedScene" uid="uid://cgcjg1u4h6ktw" path="res://addons/genki-flying-text/plain_white.tscn" id="2_472cp"]
 
-[node name="ParticleTester" type="Node2D"]
+[node name="ParticleTester" type="Node2D" unique_id=362460057]
 script = ExtResource("1_wmqxx")
 damage_number = ExtResource("2_472cp")
