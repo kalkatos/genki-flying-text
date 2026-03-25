@@ -57,10 +57,10 @@ func _handle_particles_finished ():
 ## Static helper to play a damage number from a prefab, managing persistence and initialization.
 static func play_static (prefab: PackedScene, value: String, position: Vector2, color: Color = Color.WHITE, parent: Node = null) -> void:
 	# Reuse base instance if it already exists
-	if first_instances.has(prefab):
+	if first_instances.has(prefab) and is_instance_valid(first_instances[prefab]):
 		first_instances[prefab].play(value, position, color)
 		return
-	# Instantiate first occurrence
+	# Instantiate first occurrence or if the previous instance was freed
 	var instance = prefab.instantiate() as DamageNumber
 	if parent:
 		parent.add_child(instance)
