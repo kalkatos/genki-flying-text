@@ -24,6 +24,10 @@ func _ready () -> void:
 	particles.finished.connect(_handle_particles_finished)
 
 
+func play_at_position (value: String) -> void:
+	play(value, global_position, modulate)
+
+
 ## Plays the damage number animation with the given string value and position.
 ## [param value]: The text to display (e.g., "15").
 ## [param position]: World-space 2D position to start the animation.
