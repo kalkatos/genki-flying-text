@@ -1,4 +1,5 @@
 @icon("uid://bo7uc4yxwy1t4")
+@tool
 class_name DamageNumber
 ## Component specialized in displaying animated floating numbers (e.g., damage, healing) in 2D or 3D space.
 extends Node2D
@@ -11,6 +12,10 @@ signal finished
 @export var prefix: String = ""
 @export var suffix: String = ""
 
+@export_tool_button("Test Play")
+var b1:
+	get: return func(): particles.restart() if particles else null
+
 var is_playing: bool
 
 static var first_instances: Dictionary[PackedScene, DamageNumber] = {}
@@ -18,13 +23,20 @@ static var first_instances: Dictionary[PackedScene, DamageNumber] = {}
 
 ## Initializes the damage number, connecting particle signals and setting up the visual components.
 func _ready () -> void:
+	if Engine.is_editor_hint():
+		return
 	is_playing = false
 	# Link subviewport texture to particles for label rendering
 	particles.texture = subviewport.get_texture()
 	particles.finished.connect(_handle_particles_finished)
 
 
-func play_at_position (value: String) -> void:
+func play_as_is () -> void:
+	# Plays the animation using the current label text, position, and color without modifying them.
+	play(label.text, global_position, modulate)
+
+
+func play_at_position (value: String = "") -> void:
 	play(value, global_position, modulate)
 
 
