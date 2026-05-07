@@ -14,7 +14,7 @@ signal finished
 
 @export_tool_button("Test Play")
 var b1:
-	get: return func(): particles.restart() if particles else null
+	get: return func(): _test_play()
 
 var is_playing: bool
 
@@ -68,6 +68,11 @@ func _handle_particles_finished ():
 	is_playing = false
 	finished.emit()
 	visible = false
+
+
+func _test_play () -> void:
+	if particles:
+		particles.restart()
 
 
 ## Static helper to play a damage number from a prefab, managing persistence and initialization.
